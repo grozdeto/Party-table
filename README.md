@@ -41,6 +41,15 @@ IN: can be high or low level control relay
 NO: normally open relay interface
 COM: Common Interface Relays
 NC: normally closed relay interface
+### 4) HC-SR04 Sensors
+    Operating voltage: +5V
+    Theoretical  Measuring Distance: 2cm to 450cm
+    Practical Measuring Distance: 2cm to 80cm
+    Accuracy: 3mm
+    Measuring angle covered: <15°
+    Operating Current: <15mA
+    Operating Frequency: 40Hz
+
 
 ## Сърдатели
 Михаел Георгиев, 11A клас
