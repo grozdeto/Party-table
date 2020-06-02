@@ -5,6 +5,7 @@
 #define INVALID_COLOR -1 
 #define INVALID_PIN -1 
 
+int buttonStart = 27;
 int buttonPin1 = 2; 
 int buttonPin2 = 3;
 int buttonPin3 = 4;
@@ -24,7 +25,7 @@ int lastButton1State = currentButton1State;
 int lastButton2State = currentButton2State;
 int lastButton3State = currentButton3State; 
 int lastButton4State = currentButton4State;
-
+int start = 0;
 int level = 3; 
 int colors[MAX_COLORS]; 
 int colorPins[] = {A3,A4,A5};
@@ -43,6 +44,7 @@ randomSeed(analogRead(0));
 pinMode(REDPIN, OUTPUT);
 pinMode(GREENPIN, OUTPUT);
 pinMode(BLUEPIN, OUTPUT);
+pinMode(buttonStart, INPUT);
 pinMode(buttonPin1, INPUT);
 pinMode(buttonPin2, INPUT);
 pinMode(buttonPin3, INPUT);
@@ -60,9 +62,16 @@ analogWrite(BLUEPIN, 0);
 }
 
 void loop() {
-  addColors(); 
-  displayColors(); 
-  level++; 
+  Serial.print("start = ");
+  Serial.println(start);
+  start = digitalRead(buttonStart);
+  Serial.print("start = ");
+  Serial.println(start);
+  if(start == HIGH) {
+    addColors(); 
+    displayColors(); 
+    level++;
+  } 
 } 
 void resetGame() { 
 //delay(20000);
@@ -155,14 +164,14 @@ void readPlayers(int res) {
       digitalWrite(pompPin2, LOW);
       digitalWrite(pompPin3, LOW); 
       digitalWrite(pompPin4, LOW); 
-      delay(10000); 
+      delay(5000); 
       digitalWrite(pompPin2, HIGH); 
       digitalWrite(pompPin3, HIGH); 
       digitalWrite(pompPin4, HIGH); 
      } else { 
        Serial.print("NO");
        digitalWrite(pompPin1, LOW); 
-       delay(10000); 
+       delay(5000); 
        digitalWrite(pompPin1, HIGH); 
      } 
      resetGame(); 
@@ -179,14 +188,14 @@ void readPlayers(int res) {
       digitalWrite(pompPin1, LOW); 
       digitalWrite(pompPin3, LOW); 
       digitalWrite(pompPin4, LOW); 
-      delay(10000); 
+      delay(5000); 
       digitalWrite(pompPin1, HIGH); 
       digitalWrite(pompPin3, HIGH); 
       digitalWrite(pompPin4, HIGH); 
     } else { 
       Serial.print("NO"); 
       digitalWrite(pompPin2, LOW); 
-      delay(10000); 
+      delay(5000); 
       digitalWrite(pompPin2, HIGH); 
     } 
     resetGame(); 
@@ -203,14 +212,14 @@ void readPlayers(int res) {
      digitalWrite(pompPin1, LOW); 
      digitalWrite(pompPin2, LOW); 
      digitalWrite(pompPin4, LOW); 
-     delay(10000); 
+     delay(5000); 
      digitalWrite(pompPin1, HIGH); 
      digitalWrite(pompPin2, HIGH); 
      digitalWrite(pompPin4, HIGH); 
     } else { 
       Serial.print("NO"); 
       digitalWrite(pompPin3, LOW); 
-      delay(10000); 
+      delay(5000); 
       digitalWrite(pompPin3, HIGH); 
     } 
     resetGame();
@@ -227,14 +236,14 @@ void readPlayers(int res) {
       digitalWrite(pompPin1, LOW); 
       digitalWrite(pompPin2, LOW); 
       digitalWrite(pompPin3, LOW); 
-      delay(10000); 
+      delay(5000); 
       digitalWrite(pompPin1, HIGH); 
       digitalWrite(pompPin2, HIGH); 
       digitalWrite(pompPin3, HIGH); 
     } else { 
       Serial.print("NO"); 
       digitalWrite(pompPin4, LOW); 
-      delay(10000); 
+      delay(20000); 
       digitalWrite(pompPin4, HIGH); 
     } 
     resetGame(); 
